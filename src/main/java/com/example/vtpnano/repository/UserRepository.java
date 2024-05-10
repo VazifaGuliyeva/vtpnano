@@ -1,2 +1,12 @@
-package com.example.vtpnano.repository;public interface UserRepository {
+package com.example.vtpnano.repository;
+
+import com.example.vtpnano.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository<User, UUID> {
+
+    Optional<User> findUserByEmail(String email);
 }

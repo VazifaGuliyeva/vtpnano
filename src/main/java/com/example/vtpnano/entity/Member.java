@@ -1,4 +1,4 @@
-package com.example.vtpnano;
+package com.example.vtpnano.entity;
 
 
 import jakarta.persistence.*;
@@ -16,8 +16,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Member {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
     @Column(name="names")
