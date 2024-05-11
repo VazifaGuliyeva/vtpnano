@@ -24,4 +24,7 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void registerRequest(RegisterRequets registerRequets);
+
+    String login(RegisterRequets registerRequets);
+
 }

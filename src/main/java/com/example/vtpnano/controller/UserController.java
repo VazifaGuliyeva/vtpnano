@@ -53,4 +53,9 @@ public class UserController {
         userImpl.registerRequest(registerRequets);
 
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody RegisterRequets request) {
+        return userImpl.login(request);
+    }
 }

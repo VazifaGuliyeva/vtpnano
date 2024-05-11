@@ -54,6 +54,12 @@ public class MemberImpl implements MemberService{
     }
 
     @Override
+    public List<MemberDto> searchMember(String name) {
+        List<Member> members=memberRepository.findMembersByNameStartsWith(name);
+        return memberMapper.toMemberDtoList(members);
+    }
+
+    @Override
     public void deleteAllMember() {
         memberRepository.deleteAll();
 

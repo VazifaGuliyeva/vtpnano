@@ -7,10 +7,14 @@ import com.example.vtpnano.entity.User;
 import com.example.vtpnano.errors.UserNotFoundException;
 import com.example.vtpnano.mapper.UserMapper;
 import com.example.vtpnano.repository.UserRepository;
+import com.example.vtpnano.security.JwtService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +27,9 @@ public class UserImpl implements UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+
 
 
 
@@ -85,5 +92,19 @@ public class UserImpl implements UserService{
         user.setPassword(passwordEncoder.encode(registerRequets.getPassword()));
 
         userRepository.save(user);
+    }
+
+    @Override
+    public String login(RegisterRequets registerRequets) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        registerRequets.getEmail(),
+                        registerRequets.getPassword()
+                )
+        );
+
+        UserDetails user = userMapper.toMyUserDetails(getUserByEmail(registerRequets.getEmail()));
+
+        return jwtService.generateToken(user);
     }
 }

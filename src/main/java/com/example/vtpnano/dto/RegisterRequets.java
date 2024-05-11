@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegisterRequets {
-    String fullname;
+    String fullName;
     String email;
     String password;
 }

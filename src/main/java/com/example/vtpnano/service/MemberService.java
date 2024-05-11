@@ -17,6 +17,8 @@ public interface MemberService {
 
     void updateMember(UUID id,MemberDto member);
 
+    List<MemberDto> searchMember(String name);
+
     void deleteAllMember();
 
     void deleteById(UUID id);

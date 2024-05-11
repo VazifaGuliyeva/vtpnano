@@ -47,4 +47,9 @@ public class MemberController {
         memberImpl.deleteById(id);
 
     }
+    @GetMapping("/search/{name}")
+    public List<MemberDto> searchMember(@PathVariable String name) {
+        return memberImpl.searchMember(name);
+    }
+
 }
